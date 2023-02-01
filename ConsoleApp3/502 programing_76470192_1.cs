@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
 namespace LANGHAM_HOTEL_MANAGEMENT_SYSTEM
 {
@@ -39,66 +40,80 @@ namespace LANGHAM_HOTEL_MANAGEMENT_SYSTEM
         static void Main(string[] args)
         {
             try {
-                Console.WriteLine("LANGHAM_HOTEL_MANAGEMENT_SYSTEM");
-                Console.WriteLine("1.Add Rooms");
-                Console.WriteLine("2.Display Rooms");
-                Console.WriteLine("3.Allocate Rooms");
-                Console.WriteLine("4.De-Allocate Rooms");
-                Console.WriteLine("5.Display Room Allocation Details");
-                Console.WriteLine("6.Billing");
-                Console.WriteLine("7.Save the Room Allocations To a File");
-                Console.WriteLine("8.Show the Room Allocations From a File");
-                Console.WriteLine("9.Exit");
-                Console.WriteLine("0.Backup");
-                Console.WriteLine("Enter Yoour Choice Number Here:");
-                int choice = Convert.ToInt32(Console.ReadLine());
-                switch (choice)
+                bool shouldBackToMenu = true;
+                while(shouldBackToMenu)
                 {
-                    case 1:
-                        Console.Clear();
-                        AddRooms();
-                        break;
-                    case 2:
-                        Console.Clear();
-                        DisplayRooms();
-                        break;
-                    case 3:
-                        Console.Clear();
-                        AllocateRooms();
-                        break;
-                    case 4:
-                        Console.Clear();
-                        DeAllocateRooms();
-                        break;
-                    case 5:
-                        Console.Clear();
-                        DisplayRoomAllocationDetails();
-                        break;
-                    case 6:
-                        Console.Clear();
-
-                        break;
-                    case 7:
-                        Console.Clear();
-                        SavetheRoomAllocationsToaFile();
-                        break;
-                    case 8:
-                        Console.Clear();
-                        ShowtheRoomAllocationsToaFile();
-                        break;
-                    case 9:
-                        Console.Clear();
-
-                        break;
-                    case 0:
-                        Console.Clear();
-                        Backup();
-                        break;
-                } } catch (Exception e) {
+                    shouldBackToMenu = ShowMenu();
+                }
+            } catch (Exception e) {
                 Console.WriteLine(e.Message);
             }
+        }
 
+        private static bool ShowMenu()
+        {
+            Console.WriteLine("LANGHAM_HOTEL_MANAGEMENT_SYSTEM");
+            Console.WriteLine("1.Add Rooms");
+            Console.WriteLine("2.Display Rooms");
+            Console.WriteLine("3.Allocate Rooms");
+            Console.WriteLine("4.De-Allocate Rooms");
+            Console.WriteLine("5.Display Room Allocation Details");
+            Console.WriteLine("6.Billing");
+            Console.WriteLine("7.Save the Room Allocations To a File");
+            Console.WriteLine("8.Show the Room Allocations From a File");
+            Console.WriteLine("9.Exit");
+            Console.WriteLine("0.Backup");
+            Console.WriteLine("Enter Yoour Choice Number Here:");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            switch (choice)
+            {
+                case 1:
+                    Console.Clear();
+                    AddRooms();
+                    break;
+                case 2:
+                    Console.Clear();
+                    DisplayRooms();
+                    break;
+                case 3:
+                    Console.Clear();
+                    AllocateRooms();
+                    break;
+                case 4:
+                    Console.Clear();
+                    DeAllocateRooms();
+                    break;
+                case 5:
+                    Console.Clear();
+                    DisplayRoomAllocationDetails();
+                    break;
+                case 6:
+                    Console.Clear();
+                    ShowBillingDetails();
+                    break;
+                case 7:
+                    Console.Clear();
+                    SavetheRoomAllocationsToaFile();
+                    break;
+                case 8:
+                    Console.Clear();
+                    ShowtheRoomAllocationsToaFile();
+                    break;
+                case 9:
+                    Console.Clear();
+                    return false;
+                    break;
+                case 0:
+                    Console.Clear();
+                    Backup();
+                    break;
+            }
+            return true;
+        }
 
+        private static void ShowBillingDetails()
+        {
+            Console.WriteLine("Billing Feature is Under Construction and will be added soon...!!!");
         }
 
         private static void DisplayRooms()
