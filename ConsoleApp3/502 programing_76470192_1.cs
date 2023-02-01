@@ -33,9 +33,9 @@ namespace LANGHAM_HOTEL_MANAGEMENT_SYSTEM
     {
         public static TheRoom[] listofRooms;
         public static List<RoomAllocation> listofRoomAllocations = new List<RoomAllocation>();
-        public static string FolderPath;
-        public static string filepath;
-        public static string backupfilePath;
+        public static string FolderPath = "c:\\temp\\";
+        public static string Filepath = "lhms_studentid.txt";
+        public static string BackupfilePath = "";
 
         static void Main(string[] args)
         {
@@ -230,15 +230,6 @@ namespace LANGHAM_HOTEL_MANAGEMENT_SYSTEM
                 {
                     Console.Write("Wrong Room Number...");
                 }
-
-
-
-
-
-
-
-
-
             }
             catch (Exception e) { Console.WriteLine(e.Message); }
 
@@ -268,16 +259,16 @@ namespace LANGHAM_HOTEL_MANAGEMENT_SYSTEM
                 DateTime DT = new DateTime();
                 DT = System.DateTime.Now;
                 string Time = DT.ToString("dd-mm-yyyy HH:mm:ss");
-                StreamWriter SW = new StreamWriter(filepath);
+                var path = FolderPath + Filepath;
+                StreamWriter SW = new StreamWriter(path);
                 {
                     foreach (RoomAllocation item in listofRoomAllocations)
                     {
-                        Console.WriteLine(item.AllocatedCustomer.CustomerNo + "\t\t" + item.AllocationRoomNumber + "\t\t" + item.AllocatedCustomer.CustomerName + "\t\t" + Time);
-                        SW.WriteLine(item.AllocatedCustomer.CustomerNo + "\t\t" + item.AllocationRoomNumber + "\t\t" + item.AllocatedCustomer.CustomerName + "\t\t" + Time);
-
+                        var roomAllocationSting = item.AllocatedCustomer.CustomerNo + "\t\t" + item.AllocationRoomNumber + "\t\t" + item.AllocatedCustomer.CustomerName + "\t\t" + Time;
+                        SW.WriteLine(roomAllocationSting);
                     }
                 }
-
+                SW.Close();
             }
             catch (Exception e) { Console.WriteLine(e.Message); }
 
@@ -286,7 +277,12 @@ namespace LANGHAM_HOTEL_MANAGEMENT_SYSTEM
         {
             try
             {
-                Console.WriteLine("Please enter how many room you wants");
+                var path = FolderPath + Filepath;
+                StreamReader SR = new StreamReader(path);
+                {
+                    Console.WriteLine(SR.ReadToEnd());
+                }
+                SR.Close();
             }
             catch (Exception e) { Console.WriteLine(e.Message); }
         }
