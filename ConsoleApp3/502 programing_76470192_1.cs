@@ -23,8 +23,8 @@ namespace LANGHAM_HOTEL_MANAGEMENT_SYSTEM
     }
     public class RoomAllocation
     {
-        public int AllocationRoomNumber { get; set; } 
-        public TheCustomer AllocatedCustomer{ get; set; }
+        public int AllocationRoomNumber { get; set; }
+        public TheCustomer AllocatedCustomer { get; set; }
     }
 
 
@@ -39,13 +39,16 @@ namespace LANGHAM_HOTEL_MANAGEMENT_SYSTEM
 
         static void Main(string[] args)
         {
-            try {
+            try
+            {
                 bool shouldBackToMenu = true;
-                while(shouldBackToMenu)
+                while (shouldBackToMenu)
                 {
                     shouldBackToMenu = ShowMenu();
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine(e.Message);
             }
         }
@@ -125,7 +128,8 @@ namespace LANGHAM_HOTEL_MANAGEMENT_SYSTEM
                     Console.WriteLine(room.RoomNumbers);
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Console.WriteLine(e.Message);
             }
         }
@@ -145,7 +149,8 @@ namespace LANGHAM_HOTEL_MANAGEMENT_SYSTEM
                     listofRooms[i] = room;
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Console.WriteLine(e.Message);
             }
 
@@ -189,14 +194,16 @@ namespace LANGHAM_HOTEL_MANAGEMENT_SYSTEM
                     Console.Write("Wrong Room Number");
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Console.WriteLine(e.Message);
             }
 
         }
         private static void DeAllocateRooms()
         {
-            try {
+            try
+            {
                 Console.WriteLine("DeAllocation Room Function is called from main Function Switch");
                 Console.WriteLine("Please Enter The Room Number: ");
                 int Roomno = Convert.ToInt32(Console.ReadLine());
@@ -204,17 +211,18 @@ namespace LANGHAM_HOTEL_MANAGEMENT_SYSTEM
                 for (int i = 0; i < listofRooms.Length; i++)
                 {
                     if (Roomno == listofRooms[i].RoomNumbers)
-                    { 
-                        if (Avaliable == listofRooms[i].isAllocated) 
+                    {
+                        if (Avaliable == listofRooms[i].isAllocated)
                         {
                             listofRooms[i].isAllocated = false;
                             Avaliable = false;
 
-                        } 
+                        }
                     }
-                    
+
                 }
-                if (Avaliable == false) {
+                if (Avaliable == false)
+                {
                     RoomAllocation roomallocation = listofRoomAllocations.Find(x => x.AllocationRoomNumber == Roomno);
                     listofRoomAllocations.Remove(roomallocation);
                 }
@@ -222,16 +230,17 @@ namespace LANGHAM_HOTEL_MANAGEMENT_SYSTEM
                 {
                     Console.Write("Wrong Room Number...");
                 }
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            }catch(Exception e) { Console.WriteLine(e.Message); }
+
+
+
+
+
+
+
+
+
+            }
+            catch (Exception e) { Console.WriteLine(e.Message); }
 
         }
         private static void DisplayRoomAllocationDetails()
@@ -245,7 +254,7 @@ namespace LANGHAM_HOTEL_MANAGEMENT_SYSTEM
                 Console.WriteLine("---------------------------------------------------------------------------------");
                 foreach (RoomAllocation item in listofRoomAllocations)
                 {
-                    Console.WriteLine(item.AllocatedCustomer.CustomerNo+"\t\t"+item.AllocationRoomNumber+"\t\t"+ item.AllocatedCustomer.CustomerName);                
+                    Console.WriteLine(item.AllocatedCustomer.CustomerNo + "\t\t" + item.AllocationRoomNumber + "\t\t" + item.AllocatedCustomer.CustomerName);
 
                 }
             }
@@ -255,19 +264,22 @@ namespace LANGHAM_HOTEL_MANAGEMENT_SYSTEM
         private static void SavetheRoomAllocationsToaFile()
         {
             try
-            {DateTime DT=new DateTime();
-                DT=System.DateTime.Now;
+            {
+                DateTime DT = new DateTime();
+                DT = System.DateTime.Now;
                 string Time = DT.ToString("dd-mm-yyyy HH:mm:ss");
                 StreamWriter SW = new StreamWriter(filepath);
-                { foreach (RoomAllocation item in listofRoomAllocations) {
-                        Console.WriteLine(item.AllocatedCustomer.CustomerNo + "\t\t" + item.AllocationRoomNumber + "\t\t" + item.AllocatedCustomer.CustomerName+ "\t\t"+Time);
-                    SW.WriteLine(item.AllocatedCustomer.CustomerNo + "\t\t" + item.AllocationRoomNumber + "\t\t" + item.AllocatedCustomer.CustomerName + "\t\t" + Time);
-                    
-                    
-                    
-                    } }
-                
-            } catch (Exception e) { Console.WriteLine(e.Message); }
+                {
+                    foreach (RoomAllocation item in listofRoomAllocations)
+                    {
+                        Console.WriteLine(item.AllocatedCustomer.CustomerNo + "\t\t" + item.AllocationRoomNumber + "\t\t" + item.AllocatedCustomer.CustomerName + "\t\t" + Time);
+                        SW.WriteLine(item.AllocatedCustomer.CustomerNo + "\t\t" + item.AllocationRoomNumber + "\t\t" + item.AllocatedCustomer.CustomerName + "\t\t" + Time);
+
+                    }
+                }
+
+            }
+            catch (Exception e) { Console.WriteLine(e.Message); }
 
         }
         private static void ShowtheRoomAllocationsToaFile()
@@ -275,7 +287,8 @@ namespace LANGHAM_HOTEL_MANAGEMENT_SYSTEM
             try
             {
                 Console.WriteLine("Please enter how many room you wants");
-            }catch (Exception e) { Console.WriteLine(e.Message); }
+            }
+            catch (Exception e) { Console.WriteLine(e.Message); }
         }
         private static void Backup()
         {
