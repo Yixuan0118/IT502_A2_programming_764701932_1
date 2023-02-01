@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using static System.Net.WebRequestMethods;
 
 namespace LANGHAM_HOTEL_MANAGEMENT_SYSTEM
 {
@@ -35,7 +36,7 @@ namespace LANGHAM_HOTEL_MANAGEMENT_SYSTEM
         public static List<RoomAllocation> listofRoomAllocations = new List<RoomAllocation>();
         public static string FolderPath = "c:\\temp\\";
         public static string Filepath = "lhms_studentid.txt";
-        public static string BackupfilePath = "";
+        public static string BackupfilePath = "lhms_studentid_backup.txt";
 
         static void Main(string[] args)
         {
@@ -286,10 +287,33 @@ namespace LANGHAM_HOTEL_MANAGEMENT_SYSTEM
             }
             catch (Exception e) { Console.WriteLine(e.Message); }
         }
+
         private static void Backup()
         {
-            Console.WriteLine("Please enter how many room you wants");
+            
 
+            try
+            {
+                var path = FolderPath + Filepath;
+                var roomAllcationDetails = "";
+                //“Read the content of the file and append it to another file called “lhms_studentid_backup.txt
+                StreamReader SR = new StreamReader(path);
+                {
+                    roomAllcationDetails = SR.ReadToEnd();
+                }
+                SR.Close();
+
+                var backupPath = FolderPath + BackupfilePath;
+                StreamWriter SW = new StreamWriter(backupPath);
+                {
+                    SW.Write(roomAllcationDetails);
+                }
+                SW.Close();
+
+                //delete the content of the “lhms_studentid.txt” file”.
+                System.IO.File.WriteAllText(path, String.Empty);
+            }
+            catch (Exception e) { Console.WriteLine(e.Message); }
         }
     }
 }
